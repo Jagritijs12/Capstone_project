@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.ensemble import IsolationForest, RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
