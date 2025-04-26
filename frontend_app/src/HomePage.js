@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
-import { auth } from "./firebase-config";
+import { auth } from "../../frontend/src/firebase-config";
 
 const HomePage = () => {
     const [tasks, setTasks] = useState([]);
