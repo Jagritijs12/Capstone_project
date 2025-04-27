@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Home from "./components/Home"; 
 import Tutorial from "./components/Tutorial";
 
+
 function App() {
   return (
     <Router>
@@ -35,5 +36,9 @@ function Main() {
   );
 }
 
+<<<<<<< HEAD
 export default App;
 
+=======
+export default App;
+>>>>>>> 6596e61ad480a065a74bcf90a2d18c8ab4d95e8d
