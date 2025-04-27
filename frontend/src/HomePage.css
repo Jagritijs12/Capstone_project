@@ -1,0 +1,111 @@
+/* HomePage.css */
+.home-container {
+    overflow-x: hidden;
+  }
+  
+  .hero-section {
+    background-color: #03045E; /* Deep blue */
+    color: white;
+    transition: height 0.4s ease-out, transform 0.4s ease-out, opacity 0.4s ease-out;
+    position: fixed; /* Keep it fixed for the animation */
+    top: 0;
+    left: 0;
+    width: 100%; /* Initially full width */
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+  
+  .hero-content {
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .hero-section h1 {
+    font-size: 3.5rem; /* Slightly larger title */
+    margin-bottom: 15px;
+    font-weight: 600; /* Semi-bold */
+    letter-spacing: 0.5px;
+  }
+  
+  .hero-section p {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin: 0 auto;
+    opacity: 0.8; /* Slightly less opaque for a softer look */
+  }
+  
+  /* About Section */
+  .about-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: white;
+    z-index: 5;
+    text-align: center;
+    transition: padding-top 0.4s ease-out;
+  }
+  
+  .about-content {
+    max-width: 900px;
+    padding: 40px 20px;
+  }
+  
+  .about-content h2 {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    color: #2c3e50;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+  }
+  
+  .about-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  /* Button Section */
+  .auth-button-container {
+    margin-top: 40px;
+  }
+  
+  .auth-button {
+    padding: 14px 28px;
+    font-size: 1rem;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .auth-button.primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .auth-button.primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+  
+  .auth-button.secondary {
+    background-color: #f8f9fa;
+    color: #343a40;
+    border: 1px solid #ced4da;
+  }
+  
+  .auth-button.secondary:hover {
+    background-color: #e2e6ea;
+    transform: translateY(-2px);
+  }
