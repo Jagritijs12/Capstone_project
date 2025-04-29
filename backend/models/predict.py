@@ -5,9 +5,9 @@ import numpy as np
 import pandas as pd
 
 # Load model and tools
-model = joblib.load('C:/Users/archa/.vscode/Capstone project 2.0/Capstone_project/models/rf_model.pkl')
-scaler = joblib.load('C:/Users/archa/.vscode/Capstone project 2.0/Capstone_project/models/scaler.pkl')
-label_encoders = joblib.load('C:/Users/archa/.vscode/Capstone project 2.0/Capstone_project/models/label_encoders.pkl')
+model = joblib.load('C:/Users/archa/.vscode/Capstone project 2.0/Capstone_project/backend/models/rf_model.pkl')
+scaler = joblib.load('C:/Users/archa/.vscode/Capstone project 2.0/Capstone_project/backend/models/scaler.pkl')
+label_encoders = joblib.load('C:/Users/archa/.vscode/Capstone project 2.0/Capstone_project/backend/models/label_encoders.pkl')
 
 # Fake input when running manually
 if sys.stdin.isatty():
