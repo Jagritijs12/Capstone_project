@@ -2,8 +2,8 @@ import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torchvision import datasets, transforms, models
-from torch.utils.data import DataLoader, random_split, ConcatDataset
+from torchvision import datasets, transforms
+from torch.utils.data import DataLoader, random_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import numpy as np
 import matplotlib.pyplot as plt
@@ -68,7 +68,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training
-epochs = 10
+epochs = 5
 for epoch in range(epochs):
     model.train()
     total_loss = 0
@@ -120,3 +120,8 @@ plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.tight_layout()
 plt.show()
+
+
+model_save_path = "C:/Users/archa/.vscode/Capstone project 2.0/Capstone_project/models/cnn_stego_model.pth"
+torch.save(model.state_dict(), model_save_path)
+print(f"Model saved to {model_save_path}")
