@@ -1,3 +1,4 @@
+// Home.js
 import React from "react";
 import "./Home.css";
 import Card from "./Card";
@@ -9,7 +10,7 @@ const Home = () => {
     {
       id: 1,
       title: "About Logs",
-      subtitle: "Learn More",
+      subtitle: "Tutorial",
       action: "Analyze Logs",
       icon: "/images/log.jpg", // Corrected local image path
       backgroundColor: "#64ffda",
@@ -18,7 +19,7 @@ const Home = () => {
     {
       id: 2,
       title: "About Images",
-      subtitle: "Learn More",
+      subtitle: "Tutorial",
       action: "Analyze Images",
       icon: "/images/img.jpg", // Corrected local image path
       backgroundColor: "#64ffda",
@@ -27,7 +28,7 @@ const Home = () => {
     {
       id: 3,
       title: "About Documents",
-      subtitle: "Learn More",
+      subtitle: "Tutorial",
       action: "Analyze Documents",
       icon: "/images/doc.jpg", // Corrected local image path
       backgroundColor: "#64ffda",
@@ -37,7 +38,6 @@ const Home = () => {
 
   return (
     <section className="home">
-
       <div className="cards-container">
         {cardsData.map((card) => (
           <Card key={card.id} {...card} onActionClick={() => navigate(card.route)} />
