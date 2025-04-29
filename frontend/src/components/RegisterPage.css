@@ -55,7 +55,7 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     color: #ffffff;
-    background-color: #4caf50;
+    background-color: #03045E;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -63,7 +63,7 @@ body {
   }
   
   .register-form button:hover {
-    background-color: #45a049;
+    background-color: #03045E;
   }
   
   /* Error Message */
@@ -80,7 +80,7 @@ body {
   }
   
   .redirect-login a {
-    color: #4caf50;
+    color: #03045E;
     text-decoration: none;
     font-weight: bold;
   }
@@ -113,20 +113,20 @@ body {
   
   /* Google button */
   .google-btn {
-    background-color: #db4437;
+    background-color: #db4437 !important;
   }
   
   .google-btn:hover {
-    background-color: #c53727;
+    background-color: #c53727 !important;
   }
   
   /* GitHub button */
   .github-btn {
-    background-color: #333333;
+    background-color: #333333 !important;
   }
   
   .github-btn:hover {
-    background-color: #222222;
+    background-color: #222222 !important;
   }
   
   /* Responsive */

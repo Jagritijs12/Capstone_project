@@ -34,7 +34,6 @@ const HomePage = () => {
     navigate('/session-over');
   };
   const handleMainPage = async () => {
-    await auth.signOut();
     navigate('/home');
   }
 
@@ -109,7 +108,7 @@ const HomePage = () => {
               <>
                 <p>Hello, {user.displayName || user.email}!</p>
                 <button onClick={handleLogout} className="auth-button">Logout</button>
-                <button onclick={handleMainPage} className="auth-button">Home</button>
+                <button onClick={handleMainPage} className="auth-button">Home</button>
               </>
             ) : (
               <>

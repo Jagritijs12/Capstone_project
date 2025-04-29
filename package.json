@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Jagritijs12/Capstone_project#readme",
   "dependencies": {
+    "capstone_project": "file:",
     "child_process": "^1.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",

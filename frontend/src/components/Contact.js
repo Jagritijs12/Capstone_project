@@ -49,7 +49,7 @@ function Contact() {
               rel="noopener noreferrer"
             >
               <img
-                src="/images/linkedin.png"
+                src="/images/linkdein.png"
                 alt="LinkedIn"
                 className="social-image"
               />

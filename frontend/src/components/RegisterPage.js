@@ -24,14 +24,13 @@ const RegisterPage = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/register', {
-        name, email, password
-      });
       await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(auth.currentUser, { displayName: name });
+      await axios.post('http://localhost:5000/api/register', { name, email, password });
       navigate('/home');
     } catch (err) {
-      alert(err.response?.data?.message || 'Registration failed');
+      const errorMessage = err.response?.data?.message || err.message || 'Registration failed';
+      setError(errorMessage);
     }
   };
 
@@ -67,8 +66,8 @@ const RegisterPage = () => {
       <p>
         Already have an account? <Link to="/login">Login here</Link>
       </p>
-      <button className="oauth-button" onClick={handleGoogleAuth}>Continue with Google</button>
-      <button className="oauth-button" onClick={handleGitHubAuth}>Continue with GitHub</button>
+      <button className="google-btn" onClick={handleGoogleAuth}>Continue with Google</button>
+      <button className="github-btn" onClick={handleGitHubAuth}>Continue with GitHub</button>
     </div>
   );
 };

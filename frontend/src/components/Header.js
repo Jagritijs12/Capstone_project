@@ -1,17 +1,20 @@
 import React, {useState} from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
   const handleLogout = () => {
-    alert("Logged Out!"); // Later you can replace this with actual logout logic
+    navigate("/session-over") // Later you can replace this with actual logout logic
   };
+
   return (
     <header className="header">
       <div className="logo">

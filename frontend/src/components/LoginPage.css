@@ -56,7 +56,7 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     color: #ffffff;
-    background-color: #4caf50;
+    background-color: #03045E;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -64,7 +64,7 @@ body {
   }
   
   .login-btn:hover {
-    background-color: #45a049;
+    background-color: #03045E;
   }
   
   /* Error messages */
@@ -81,7 +81,7 @@ body {
   }
   
   .forgot-password a {
-    color: #4caf50;
+    color: #03045E;
     text-decoration: none;
     font-weight: bold;
   }
@@ -101,7 +101,7 @@ body {
   }
   
   .google-btn,
-  .facebook-btn {
+  .github-btn {
     padding: 15px;
     font-size: 1.2rem;
     font-weight: bold;
@@ -120,11 +120,11 @@ body {
     background-color: #c53727;
   }
   
-  .facebook-btn {
+  .github-btn {
     background-color: #333333; /* Changed to suit GitHub branding */
   }
   
-  .facebook-btn:hover {
+  .github-btn:hover {
     background-color: #222222;
   }
   
@@ -141,7 +141,7 @@ body {
   
     .login-btn,
     .google-btn,
-    .facebook-btn {
+    .github-btn {
       font-size: 1rem;
       padding: 12px;
     }
