@@ -1,12 +1,12 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import IsolationForest, RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-df = pd.read_csv("C:\\Users\\archa\\.vscode\\Capstone project 2.0\\Capstone_project\\cybercrime_forensic_dataset.csv")
+df = pd.read_csv("C:\\Users\\archa\\.vscode\\Capstone Project\\Capstone_project\\cybercrime_forensic_dataset.csv")
 
 df.fillna(df.mean(numeric_only=True), inplace=True)
 
@@ -51,5 +51,3 @@ plt.title("Confusion Matrix")
 plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.show()
-
-#commit already!!!
