@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "homepage": "https://github.com/Jagritijs12/Capstone_project#readme",
   "bugs": {
     "url": "https://github.com/Jagritijs12/Capstone_project/issues"
@@ -28,5 +27,7 @@
     "mongoose": "^8.13.3",
     "path": "^0.12.7",
     "react-markdown": "^10.1.0"
-  }
+  },
+  "keywords": [],
+  "description": ""
 }
