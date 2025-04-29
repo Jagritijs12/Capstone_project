@@ -29,7 +29,7 @@ const RegisterPage = () => {
       });
       await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(auth.currentUser, { displayName: name });
-      navigate('/');
+      navigate('/home');
     } catch (err) {
       alert(err.response?.data?.message || 'Registration failed');
     }
@@ -38,7 +38,7 @@ const RegisterPage = () => {
   const handleGoogleAuth = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate('/');
+      navigate('/home');
     } catch (err) {
       setError(err.message);
     }

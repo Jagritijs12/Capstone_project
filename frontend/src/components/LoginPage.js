@@ -18,7 +18,7 @@ const LoginPage = () => {
     try {
       await axios.post('http://localhost:5000/api/login', credentials);
       await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
-      navigate('/');
+      navigate('/home');
     } catch (err) {
       alert(err.response?.data?.message || 'Login failed');
     }
@@ -32,7 +32,7 @@ const LoginPage = () => {
         email: user.email,
         password: user.uid, // or token-based if backend supports it
       });
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       alert('Social login failed');
     }

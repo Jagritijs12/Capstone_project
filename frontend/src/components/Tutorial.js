@@ -1,53 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 import './Tutorial.css';
 
 function Tutorial() {
   const [selectedTutorial, setSelectedTutorial] = useState('logs');
+  const [content, setContent] = useState('');
+
+  useEffect(() => {
+    fetchTutorialContent(selectedTutorial);
+  }, [selectedTutorial]);
+
+  const fetchTutorialContent = async (tutorialType) => {
+    let filename = '';
+    if (tutorialType === 'logs') filename = 'how-to-analyze-logs.md';
+    else if (tutorialType === 'images') filename = 'how-to-analyze-images.md';
+    else if (tutorialType === 'documents') filename = 'how-to-analyze-documents.md';
+
+    try {
+      const response = await fetch(`http://localhost:5000/tutorials/${filename}`);
+      const text = await response.text();
+      setContent(text);
+    } catch (error) {
+      console.error('Error loading tutorial:', error);
+      setContent('# Error loading tutorial.');
+    }
+  }; // <-- THIS } is important to close fetchTutorialContent
 
   const renderTutorialContent = () => {
-    let content;
-    switch (selectedTutorial) {
-      case 'logs':
-        content = (
-          <>
-            <h2>Logs Tutorial</h2>
-            <p>Learn how to analyze system logs effectively using DetectifAI.</p>
-            <div className="tutorial-buttons">
-              <button>Analyze Logs</button>
-              <button>Watch Video</button>
-            </div>
-          </>
-        );
-        break;
-      case 'images':
-        content = (
-          <>
-            <h2>Images Tutorial</h2>
-            <p>Discover how DetectifAI analyzes images for forensic insights.</p>
-            <div className="tutorial-buttons">
-              <button>Analyze Images</button>
-              <button>Watch Video</button>
-            </div>
-          </>
-        );
-        break;
-      case 'documents':
-        content = (
-          <>
-            <h2>Documents Tutorial</h2>
-            <p>Understand document analysis workflows with DetectifAI.</p>
-            <div className="tutorial-buttons">
-              <button>Analyze Documents</button>
-              <button>Watch Video</button>
-            </div>
-          </>
-        );
-        break;
-      default:
-        content = null;
-    }
-
     return (
       <motion.div
         key={selectedTutorial}
@@ -55,10 +35,10 @@ function Tutorial() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        {content}
+        <ReactMarkdown>{content}</ReactMarkdown>
       </motion.div>
     );
-  };
+  }; // <-- THIS } is important to close renderTutorialContent
 
   return (
     <div className="tutorial-page">
