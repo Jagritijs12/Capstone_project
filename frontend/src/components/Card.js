@@ -1,6 +1,6 @@
 // src/components/Card.js
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+//import { Link } from "react-router-dom";
 import "./Card.css";
 
 const Card = ({ title, subtitle, action, icon, backgroundColor, onActionClick }) => {
