@@ -10,7 +10,7 @@ const HomePage = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const initialHeroHeight = window.innerHeight * 0.8;
   const finalHeroHeight = 60;
-  const scrollThreshold = window.innerHeight * 0.6;
+  const scrollThreshold = window.innerHeight * 0.3;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +33,10 @@ const HomePage = () => {
     await auth.signOut();
     navigate('/session-over');
   };
+  const handleMainPage = async () => {
+    await auth.signOut();
+    navigate('/home');
+  }
 
   const heroProgress = Math.min(1, scrollPosition / scrollThreshold);
   const heroHeight = initialHeroHeight * (1 - heroProgress) + finalHeroHeight * heroProgress;
@@ -80,6 +84,7 @@ const HomePage = () => {
         <div className="hero-content" style={{ opacity: Math.max(0, 1 - heroProgress * 2) }}>
           <h1>Welcome to DetectifAI</h1>
           <p>Empowering your analysis journey with cutting-edge technology. Detect, Analyze, and Evolve with us!</p>
+          <div className="scroll-down-arrow">↓</div>
         </div>
       </section>
       <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
@@ -104,6 +109,7 @@ const HomePage = () => {
               <>
                 <p>Hello, {user.displayName || user.email}!</p>
                 <button onClick={handleLogout} className="auth-button">Logout</button>
+                <button onclick={handleMainPage} className="auth-button">Home</button>
               </>
             ) : (
               <>

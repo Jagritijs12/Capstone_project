@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -17,10 +18,10 @@ const Header = () => {
         <img src="/images/logo.jpg" alt="Logo" className="logo-image" />
       </div>
       <nav className="nav-links">
-        <a href="#home" className="nav-link active">Home</a>
-        <a href="#tutorial" className="nav-link">Tutorial</a>
-        <a href="#contact" className="nav-link">Contact Us</a>
-        <a href="#history" className="nav-link">History</a>
+        <Link to="/home" className="nav-link">Home</Link>
+        <Link to="/tutorial" className="nav-link">Tutorial</Link>
+        <Link to="/contact" className="nav-link">Contact</Link>
+        <Link to="/history" className="nav-link">History</Link>
       </nav>
       <div className="profile-container">
         <div className="profile-icon" onClick={toggleDropdown}>

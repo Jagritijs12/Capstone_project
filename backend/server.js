@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth");
+const path = require('path');
 
 dotenv.config();
 
@@ -10,7 +11,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/api', authRoutes);
-
+app.use('/tutorials', express.static(path.join(__dirname, 'tutorials')));
+app.use('/api/tutorials', require('./routes/tutorial'));
 mongoose
     .connect(process.env.MONGO_URI, {
         useNewUrlParser: true,
