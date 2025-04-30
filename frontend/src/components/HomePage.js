@@ -81,7 +81,7 @@ const HomePage = () => {
       {/* Blue Top Section */}
       <section className="hero-section" style={heroStyle}>
         <div className="hero-content" style={{ opacity: Math.max(0, 1 - heroProgress * 2) }}>
-          <h1>Welcome to DetectifAI</h1>
+          <h1>Safeguard Yourself from malicious intrusions using DetectiFAI</h1>
           <p>Empowering your analysis journey with cutting-edge technology. Detect, Analyze, and Evolve with us!</p>
           <div className="scroll-down-arrow">↓</div>
         </div>
