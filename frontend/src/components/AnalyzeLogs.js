@@ -25,7 +25,7 @@ function AnalyzeLogs() {
     formData.append('logFile', file);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/predict-log-file', formData);
+      const response = await axios.post('http://localhost:5001/api/predict-log-file', formData);
       setAnomalies(response.data.anomalies || []);
       setAnomaliesChecked(true); // ✅ Mark that check has completed
     } catch (err) {
