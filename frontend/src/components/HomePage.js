@@ -93,10 +93,7 @@ const HomePage = () => {
         <div className="about-content">
           <h2>About DetectifAI</h2>
           <p>
-            DetectifAI is a platform designed to revolutionize your analysis workflows.
-            We leverage the power of artificial intelligence to provide you with
-            intelligent insights and powerful tools. Whether you are a seasoned professional
-            or just starting your analytical journey, DetectifAI is here to empower you.
+            This platform is used for analyzing logs, images and documents for identifying malware
           </p>
           <p>
             Explore our features to discover how DetectifAI can help you detect patterns,
