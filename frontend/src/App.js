@@ -31,7 +31,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/tutorial" element={<Tutorial />} />
           {/* New routes */}
-          <Route path="/analyze/logs" element={<LogPredictor />} /> {/* New Route */}
+          <Route path="/analyze/logs" element={<AnalyzeLogs />} /> {/* New Route */}
           <Route path="/analyze/images" element={<ImagePredictor />} /> {/* New Route */}
           <Route path="/analyze/documents" element={<DocPredictor />} /> {/* New Route */}
         </Routes>
