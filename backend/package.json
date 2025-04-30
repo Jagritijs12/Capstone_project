@@ -28,5 +28,8 @@
     "mongoose": "^8.13.3",
     "path": "^0.12.7",
     "react-markdown": "^10.1.0"
+  },
+  "devDependencies": {
+    "react-app-rewired": "^2.2.1"
   }
 }

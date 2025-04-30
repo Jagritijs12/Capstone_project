@@ -20,7 +20,7 @@ function Tutorial() {
     else if (tutorialType === 'documents') filename = 'how-to-analyze-documents.md';
 
     try {
-      const response = await fetch(`http://localhost:5000/tutorials/${filename}`);
+      const response = await fetch(`http://localhost:5001/tutorials/${filename}`);
       const text = await response.text();
       setContent(text);
     } catch (error) {
