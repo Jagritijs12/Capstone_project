@@ -1,0 +1,11 @@
+Activity_Type,Action,Anomaly_Type,Timestamp,User_ID,IP_Address,File_Name,Resource_Accessed
+Login,Success,None,2024-04-25T10:00:00,1234,192.168.1.1,file1.txt,dashboard
+Logout,Success,None,2024-04-25T10:05:00,1234,192.168.1.1,file2.txt,dashboard
+Login,Failed,BruteForce,2024-04-25T10:10:00,4321,10.0.0.2,file3.exe,login
+File Access,Success,None,2024-04-25T11:00:00,5678,172.16.0.3,report.pdf,files
+Login,Failed,BruteForce,2024-04-25T11:05:00,1111,10.10.10.10,file4.docx,login
+File Access,Failed,UnauthorizedAccess,2024-04-25T12:00:00,2222,192.168.2.5,secret.doc,secure-folder
+Login,Success,None,2024-04-25T12:30:00,3333,172.16.0.5,file5.txt,home
+Logout,Failed,SessionHijack,2024-04-25T12:45:00,4444,192.168.3.3,file6.txt,logout
+Login,Failed,BruteForce,2024-04-25T13:00:00,5555,10.1.1.1,file7.zip,login
+File Access,Success,None,2024-04-25T14:00:00,6666,10.0.0.10,data.csv,archives

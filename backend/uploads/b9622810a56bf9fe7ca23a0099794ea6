@@ -1,0 +1,11 @@
+Timestamp,Activity_Type,Action,Anomaly_Type,File_Size,Login_Attempts,User_ID,IP_Address,File_Name,Resource_Accessed,Label
+2025-04-30 09:15:00,Login,Successful,None,512,1,user001,192.168.1.10,report.pdf,/secure/login,Normal
+2025-04-30 10:22:30,File Upload,Upload,None,2048,2,user002,192.168.1.11,data.csv,/uploads,data,Normal
+2025-04-30 11:05:45,Login,Failed,Brute Force,1024,5,user003,192.168.1.12,log.txt,/login,Normal
+2025-04-30 12:45:00,Access Resource,Read,None,4096,1,user004,192.168.1.13,image.png,/resources/image.png,Normal
+2025-04-30 13:30:15,Logout,Successful,None,256,1,user005,192.168.1.14,none,/logout,Normal
+2025-04-30 14:10:00,Login,Failed,Credential Stuffing,128,3,user006,192.168.1.15,none,/login,Normal
+2025-04-30 15:55:30,File Download,Download,None,8192,2,user007,192.168.1.16,report.zip,/downloads/report.zip,Normal
+2025-04-30 16:40:00,Login,Successful,None,512,1,user008,192.168.1.17,none,/login,Normal
+2025-04-30 17:05:45,Access Resource,Write,Privilege Escalation,1024,4,user009,192.168.1.18,update.sh,/admin/config,Normal
+2025-04-30 18:20:00,File Upload,Upload,Malware Upload,3072,2,user010,192.168.1.19,malware.exe,/uploads,Normal

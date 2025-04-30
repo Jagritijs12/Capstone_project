@@ -1,46 +1,74 @@
 import sys
-import json
 import joblib
-import numpy as np
 import pandas as pd
+import json
 
-# Load model and tools
-model = joblib.load('C:/Users/archa/.vscode/Capstone project 2.0/Capstone_project/backend/models/rf_model.pkl')
-scaler = joblib.load('C:/Users/archa/.vscode/Capstone project 2.0/Capstone_project/backend/models/scaler.pkl')
-label_encoders = joblib.load('C:/Users/archa/.vscode/Capstone project 2.0/Capstone_project/backend/models/label_encoders.pkl')
+def log(msg):
+    print(msg, file=sys.stderr)
 
-# Fake input when running manually
-if sys.stdin.isatty():
-    data = {
-        "Activity_Type": "Login",
-        "Action": "Success",
-        "Anomaly_Type": "None",
-        "Timestamp": "2024-04-25T10:00:00",
-        "User_ID": "1234",
-        "IP_Address": "192.168.1.1",
-        "File_Name": "file.txt",
-        "Resource_Accessed": "resource"
-    }
-else:
-    data = json.loads(sys.stdin.read())
+# Load model, scaler, and label encoders
+try:
+    model = joblib.load('./models/rf_model.pkl')
+    scaler = joblib.load('./models/scaler.pkl')
+    label_encoders = joblib.load('./models/label_encoders.pkl')
+    log("Model, scaler, and encoders loaded successfully.")
+except Exception as e:
+    print(json.dumps({"error": f"Model loading failed: {str(e)}"}))
+    sys.exit(1)
 
-df = pd.DataFrame([data])
+# Load CSV
+csv_path = sys.argv[1]
+try:
+    df = pd.read_csv(csv_path)
+    log("CSV loaded successfully.")
+except pd.errors.ParserError as e:
+    print(json.dumps({"error": f"CSV parsing error: {str(e)}"}))
+    sys.exit(1)
+except Exception as e:
+    print(json.dumps({"error": f"Failed to load CSV: {str(e)}"}))
+    sys.exit(1)
 
-# Process like training
-for col in ['Activity_Type', 'Action', 'Anomaly_Type']:
-    le = label_encoders[col]
-    df[col] = le.transform(df[col])
+# Encode categorical columns
+try:
+    for col in ['Activity_Type', 'Action']:
+        le = label_encoders[col]
+        df[col] = df[col].apply(lambda x: le.transform([x])[0] if x in le.classes_ else -1)
+        log(f"Encoded column '{col}'.")
+except Exception as e:
+    print(json.dumps({"error": f"Encoding failed: {str(e)}"}))
+    sys.exit(1)
 
-df['Timestamp'] = pd.to_datetime(df['Timestamp'])
-df['Hour'] = df['Timestamp'].dt.hour
-df['Day'] = df['Timestamp'].dt.day
-df.drop(columns=['Timestamp'], inplace=True)
+# Handle timestamp
+try:
+    df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+    df['Hour'] = df['Timestamp'].dt.hour
+    df['Day'] = df['Timestamp'].dt.day
+    df.drop(columns=['Timestamp'], inplace=True)
+    log("Timestamp features processed.")
+except Exception as e:
+    print(json.dumps({"error": f"Timestamp processing failed: {str(e)}"}))
+    sys.exit(1)
 
-df.drop(columns=['User_ID', 'IP_Address', 'File_Name', 'Resource_Accessed'], inplace=True)
+# Drop unused columns
+drop_cols = ['User_ID', 'IP_Address', 'File_Name', 'Resource_Accessed', 'Anomaly_Type', 'Label']
+df.drop(columns=[col for col in drop_cols if col in df.columns], inplace=True, errors='ignore')
+log("Dropped unused columns.")
 
-# Scale
-X_scaled = scaler.transform(df)
+# Scale and predict
+try:
+    X_scaled = scaler.transform(df)
+    preds = model.predict(X_scaled)
+    log("Predictions made.")
+except Exception as e:
+    print(json.dumps({"error": f"Prediction failed: {str(e)}"}))
+    sys.exit(1)
 
-# Predict
-pred = model.predict(X_scaled)[0]
-print(int(pred))
+# Add predictions
+try:
+    original_df = pd.read_csv(csv_path)
+    original_df['Prediction'] = preds
+    anomalies = original_df[original_df['Prediction'] == 1]
+    print(anomalies.to_json(orient="records"))
+except Exception as e:
+    print(json.dumps({"error": f"Output generation failed: {str(e)}"}))
+    sys.exit(1)
