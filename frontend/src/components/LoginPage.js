@@ -17,7 +17,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const { email, password } = credentials;
-      await axios.post('http://localhost:5000/api/login', { email, password });
+      await axios.post('http://localhost:5001/api/login', { email, password });
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/home');
     } catch (err) {
@@ -30,9 +30,9 @@ const LoginPage = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       try{
-        await axios.post('http://localhost:5000/api/login', { email: user.email });
+        await axios.post('http://localhost:5001/api/login', { email: user.email });
       }catch(loginErr){
-        await axios.post('http://localhost:5000/api/register', {
+        await axios.post('http://localhost:5001/api/register', {
           name: user.displayName || 'No Name',
           email: user.email,
           password: user.uid, // or token-based if backend supports it

@@ -14,6 +14,12 @@ const Home = () => {
       action: "Analyze Logs",
       icon: "/images/log.jpg", // Corrected local image path
       backgroundColor: "#64ffda",
+      backText: (
+        <>
+          <h2>Logs Tutorial</h2>
+          <p> Here you'll learn jow to parse, filter and visualize system logs step by step...</p>
+        </>
+      ),
       route: "/analyze/logs"
     },
     {
@@ -23,6 +29,12 @@ const Home = () => {
       action: "Analyze Images",
       icon: "/images/img.jpg", // Corrected local image path
       backgroundColor: "#64ffda",
+      backText: (
+        <>
+          <h2>Images Tutorial</h2>
+          <p>Learn how to preprocess, segment and classify images using our AI models...</p>
+        </>
+      ),
       route: "/analyze/images"
     },
     {
@@ -32,6 +44,12 @@ const Home = () => {
       action: "Analyze Documents",
       icon: "/images/doc.jpg", // Corrected local image path
       backgroundColor: "#64ffda",
+      backText: (
+        <>
+          <h2>Document Tutorial</h2>
+          <p>Discover how to extract text, detect entities and summarizse documents...</p>
+        </>
+      ),
       route: "/analyze/documents"
     },
   ];

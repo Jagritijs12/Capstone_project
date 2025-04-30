@@ -26,7 +26,7 @@ const RegisterPage = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(auth.currentUser, { displayName: name });
-      await axios.post('http://localhost:5000/api/register', { name, email, password });
+      await axios.post('http://localhost:5001/api/register', { name, email, password });
       navigate('/home');
     } catch (err) {
       const errorMessage = err.response?.data?.message || err.message || 'Registration failed';

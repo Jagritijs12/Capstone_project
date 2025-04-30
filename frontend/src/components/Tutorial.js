@@ -20,7 +20,7 @@ function Tutorial() {
     else if (tutorialType === 'documents') filename = 'how-to-analyze-documents.md';
 
     try {
-      const response = await fetch(`http://localhost:5000/tutorials/${filename}`);
+      const response = await fetch(`http://localhost:5001/tutorials/${filename}`);
       const text = await response.text();
       setContent(text);
     } catch (error) {
@@ -37,16 +37,17 @@ function Tutorial() {
     if (selectedTutorial === 'logs'){ 
       label = 'Analyze Logs';
       path = '/analyze/logs';
-      videoURL = 'https://youtu.be/tA-32BLjrFA?feature=shared'
+      videoURL = 'https://youtube.com/tA-32BLjrFA?feature=shared'
     }
     else if (selectedTutorial === 'images'){
       label = 'Analyze Images';
       path = '/analyze/images';
-      videoURL = 'https://youtu.be/-OhxfhgWjTU?feature=shared'
+      videoURL = 'https://youtube.com/-OhxfhgWjTU?feature=shared'
     }
     else if (selectedTutorial === 'documents'){
       label = 'Analyze Documents'
       path = '/analyze/documents';
+      videoURL = 'https://youtube.com/RRbrLuYXdTw?feature=shared'
     }
 
     return (
