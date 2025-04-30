@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom"; // <-- import Link and useLocation
 import "./Header.css";
 //import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation
+  const location = useLocation();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
