@@ -1,0 +1,16 @@
+Timestamp,User_ID,IP_Address,Activity_Type,Resource_Accessed,File_Name,Action,Login_Attempts,File_Size,Anomaly_Type,Label
+2024-09-27 12:53:26.390859,9288,10.174.236.5,File_Modification,/network/logs/new_project.docx,new_project.docx,Delete,,30.66,DDoS_Attempt,Suspicious
+2024-10-02 15:13:49.741543,1605,172.19.128.216,USB_Insert,/server/secrets.txt,,Read,,,Brute_Force,Suspicious
+2024-09-13 14:31:39.163288,3056,192.168.201.132,File_Modification,/project/document2.docx,document2.docx,N/A,,21.61,DDoS_Attempt,Suspicious
+2024-10-02 22:27:57.622008,1564,10.119.122.121,Network_Traffic,/backup/document2.docx,,Delete,,,None,Normal
+2024-10-01 08:00:55.017797,3660,172.23.2.38,USB_Insert,/confidential/report1.pdf,,Write,,,None,Normal
+2024-09-20 00:27:42.867506,8393,172.27.249.195,File_Access,/backup/report1.pdf,report1.pdf,Read,,10.66,None,Normal
+2024-10-02 21:21:21.837411,7927,172.16.182.238,Network_Traffic,/backup/report1.pdf,,Failed,,,None,Normal
+2024-09-26 06:44:10.720151,9558,192.168.182.157,Network_Traffic,/confidential/data.csv,,Delete,,,None,Normal
+2024-09-14 02:37:52.496926,4816,10.81.94.240,Network_Traffic,/project/new_project.docx,,Success,,,None,Normal
+2024-09-27 12:04:45.668351,3738,172.23.90.16,Network_Traffic,/confidential/report1.pdf,,Failed,,,None,Normal
+2024-10-05 07:16:58.602390,3193,192.168.111.76,File_Deletion,/network/logs/secrets.txt,secrets.txt,Inserted,,21.84,Brute_Force,Suspicious
+2024-09-26 16:46:41.933153,2863,10.70.124.201,File_Deletion,/shared/documents/report2.pdf,report2.pdf,Read,,46.88,Data_Exfil,Suspicious
+2024-10-02 12:50:26.101554,1338,192.168.61.129,Remote_Login,/confidential/document2.docx,,Read,1.0,,DDoS_Attempt,Suspicious
+2024-09-19 23:09:11.332042,4353,172.20.114.216,File_Access,/confidential/data.csv,data.csv,Failed,,21.53,Brute_Force,Suspicious
+2024-10-02 20:22:15.155822,6774,192.168.130.104,File_Modification,/project/new_project.docx,new_project.docx,N/A,,46.08,DDoS_Attempt,Suspicious

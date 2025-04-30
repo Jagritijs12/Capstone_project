@@ -1,3 +1,4 @@
+//server.js
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -7,6 +8,10 @@ const { spawn } = require("child_process");
 
 const authRoutes = require("./routes/auth");
 const tutorialRoutes = require("./routes/tutorial");
+
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+const fs = require('fs');
 
 dotenv.config();
 
@@ -44,10 +49,9 @@ mongoose
   });
 
 // --- Predict from log data ---
-app.post("/api/predict-log", (req, res) => {
-  const py = spawn("python", ["./models/predict.py"]);
-  py.stdin.write(JSON.stringify(req.body));
-  py.stdin.end();
+app.post("/api/predict-log-file", upload.single("logFile"), (req, res) => {
+  const filePath = path.resolve(req.file.path);
+  const py = spawn("python", ["./models/predict.py", filePath]);
 
   let result = "";
   py.stdout.on("data", (data) => {
@@ -59,13 +63,18 @@ app.post("/api/predict-log", (req, res) => {
   });
 
   py.on("close", (code) => {
+    fs.unlinkSync(filePath); // Clean up temp file
     try {
-      res.json({ prediction: parseInt(result.trim()) });
+      const parsed = JSON.parse(result.trim());
+      res.json({ anomalies: parsed });
     } catch (err) {
+      console.error("Error parsing Python output:", err);
       res.status(500).json({ error: "Prediction failed" });
     }
+    console.log("Python result:", result);
   });
 });
+
 
 // --- Predict from document features ---
 app.post("/api/predict-doc", (req, res) => {
