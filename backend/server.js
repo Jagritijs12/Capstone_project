@@ -118,4 +118,8 @@ app.post("/api/predict-img", (req, res) => {
       res.status(500).json({ error: "Invalid image prediction output" });
     }
   });
+  py.stderr.on("data", (data) => {
+  console.error(`PYTHON ERROR: ${data.toString()}`);
+});
+
 });

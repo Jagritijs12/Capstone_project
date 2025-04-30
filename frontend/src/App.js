@@ -9,11 +9,11 @@ import Home from "./components/Home";
 import Header from "./components/Header";
 import Contact from "./components/Contact";
 import AnalyzeLogs from "./components/AnalyzeLogs";        // <-- NEW
-//import AnalyzeImages from "./components/AnalyzeImages";    // <-- NEW
+import AnalyzeImages from "./components/AnalyzeImages";    // <-- NEW
 //import AnalyzeDocuments from "./components/AnalyzeDocuments"; // <-- NEW
 
 // New model components
-import ImagePredictor from "./components/ImagePredictor";
+//import ImagePredictor from "./components/ImagePredictor";
 import DocPredictor from "./components/DocPredictor";
 //import LogPredictor from "./components/LogPredictor";
 
@@ -53,7 +53,7 @@ function App() {
         <Route path='/analyze/images' element={
           <>
             <Header />
-            <ImagePredictor />
+            <AnalyzeImages />
           </>
         } />
         <Route path='/analyze/documents' element={
