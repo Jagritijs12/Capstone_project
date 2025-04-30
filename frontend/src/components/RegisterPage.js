@@ -34,22 +34,22 @@ const RegisterPage = () => {
     }
   };
 
-  const handleGoogleAuth = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-      navigate('/home');
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+  const handleSocialRegister = (provider) => {
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
+        const user = result.user;
 
-  const handleGitHubAuth = async () => {
-    try {
-      await signInWithPopup(auth, githubProvider);
-      navigate('/');
-    } catch (err) {
-      setError(err.message);
-    }
+        await axios.post('http://localhost:5001/api/register', {
+          name: user.displayName || 'No Name',
+          email: user.email,
+          password: user.uid || Math.random().toString(36).slice(-8),
+        });
+
+        navigate('/home');
+      })
+      .catch((err) => {
+        setError('Social registration failed: ' + err.message);
+      });
   };
 
   return (
@@ -66,8 +66,8 @@ const RegisterPage = () => {
       <p>
         Already have an account? <Link to="/login">Login here</Link>
       </p>
-      <button className="google-btn" onClick={handleGoogleAuth}>Continue with Google</button>
-      <button className="github-btn" onClick={handleGitHubAuth}>Continue with GitHub</button>
+      <button className="google-btn" onClick={() => handleSocialRegister(googleProvider)}>Continue with Google</button>
+      <button className="github-btn" onClick={() => handleSocialRegister(githubProvider)}>Continue with GitHub</button>
     </div>
   );
 };

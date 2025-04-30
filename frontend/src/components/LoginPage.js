@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { auth, googleProvider, githubProvider } from './firebase-config';
@@ -25,23 +25,27 @@ const LoginPage = () => {
     }
   };
 
-  const handleSocialLogin = async (provider) => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      try{
-        await axios.post('http://localhost:5001/api/login', { email: user.email });
-      }catch(loginErr){
-        await axios.post('http://localhost:5001/api/register', {
-          name: user.displayName || 'No Name',
-          email: user.email,
-          password: user.uid, // or token-based if backend supports it
-        });
-      }
-      navigate('/home');
-    } catch (err) {
-      alert('Social login failed');
-    }
+  const handleSocialLogin = (provider) => {
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
+        const user = result.user;
+
+        try {
+          await axios.post('http://localhost:5001/api/login', { email: user.email });
+        } catch {
+          await axios.post('http://localhost:5001/api/register', {
+            name: user.displayName || 'No Name',
+            email: user.email,
+            password: user.uid || Math.random().toString(36).slice(-8),
+          });
+        }
+
+        navigate('/home');
+      })
+      .catch((err) => {
+        console.error(err.message);
+        alert('Social login failed. Please allow popups.');
+      });
   };
 
   return (
