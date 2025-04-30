@@ -14,9 +14,9 @@ const Card = ({ title, subtitle, action, icon, backgroundColor, backText }) => {
 
   // Correct the path for analyze routes
   const getAnalyzePath = (action) => {
-    if (action === "Analyze Logs") return "/analyze-logs";
-    if (action === "Analyze Images") return "/analyze-images";
-    if (action === "Analyze Documents") return "/analyze-documents";
+    if (action === "Analyze Logs") return "/analyze/logs";
+    if (action === "Analyze Images") return "/analyze/images";
+    if (action === "Analyze Documents") return "/analyze/documents";
     return "/";
   };
 

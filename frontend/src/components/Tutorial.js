@@ -37,16 +37,17 @@ function Tutorial() {
     if (selectedTutorial === 'logs'){ 
       label = 'Analyze Logs';
       path = '/analyze/logs';
-      videoURL = 'https://youtu.be/tA-32BLjrFA?feature=shared'
+      videoURL = 'https://youtube.com/tA-32BLjrFA?feature=shared'
     }
     else if (selectedTutorial === 'images'){
       label = 'Analyze Images';
       path = '/analyze/images';
-      videoURL = 'https://youtu.be/-OhxfhgWjTU?feature=shared'
+      videoURL = 'https://youtube.com/-OhxfhgWjTU?feature=shared'
     }
     else if (selectedTutorial === 'documents'){
       label = 'Analyze Documents'
       path = '/analyze/documents';
+      videoURL = 'https://youtube.com/RRbrLuYXdTw?feature=shared'
     }
 
     return (

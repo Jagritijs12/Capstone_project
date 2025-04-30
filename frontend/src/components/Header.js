@@ -43,7 +43,7 @@ const Header = () => {
 
         {/* Contact Link */}
         <Link
-          to="/contact"
+          to="/contacts"
           className={`nav-link ${location.pathname === "/contact" ? "active" : ""}`}
         >
           Contact Us
