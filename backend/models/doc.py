@@ -1,48 +1,58 @@
 import pandas as pd
-
-df = pd.read_csv("C:\\Users\\archa\\.vscode\\Capstone project 2.0\\Capstone_project\\models\\Malware dataset.csv")
-print("📄 Dataset loaded successfully!")
-print(df.head())
-
-text_column = df.columns[0]
-label_column = df.columns[2]
-
-from sklearn.preprocessing import LabelEncoder
-
-label_encoder = LabelEncoder()
-df[label_column] = label_encoder.fit_transform(df[label_column])
-
-X = df[df.drop(columns=[text_column,label_column],axis=1).columns]
-y = df[label_column]
-print(y.head())
-print(X.head())
-
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix
 
-model=RandomForestClassifier(n_estimators=100,random_state=42)
+# 1. Load the data
+df = pd.read_csv("C:\\Users\\archa\\.vscode\\Capstone project 2.0\\Capstone_project\\backend\\models\\Malware dataset.csv")  # use your file path
 
+# 2. Drop non-informative columns
+df = df.drop(columns=["hash", "millisecond"])
+
+# 3. Encode the label
+label_encoder = LabelEncoder()
+df["classification"] = label_encoder.fit_transform(df["classification"])  # malware=1, benign=0
+
+# 4. Split into features and label
+X = df.drop(columns=["classification"])
+y = df["classification"]
+
+# 5. Feature scaling (optional but recommended for some models)
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# 6. Train/test split
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
+
+# 7. Train Random Forest model
+model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 
-from sklearn.metrics import classification_report, accuracy_score
-
+# 8. Predict and evaluate
 y_pred = model.predict(X_test)
-print("\n✅ Accuracy:", accuracy_score(y_test, y_pred))
-print("\n📊 Classification Report:\n", classification_report(y_test, y_pred))
+print("Classification Report:\n", classification_report(y_test, y_pred))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 
-custom_docs = [
-    "This document contains a malicious script that should be removed.",
-    "Your invoice for last month's cloud usage is attached.",
-    "Warning: ransomware detected in attachment."
-]
+import matplotlib.pyplot as plt
 
-'''custom_preds = model.predict(custom_docs)
-for doc, label in zip(custom_docs, custom_preds):
-    print(f"\n📄 \"{doc}\"\n➤ Prediction: {label}")'''
+importances = model.feature_importances_
+feature_names = X.columns
+
+# Sort features by importance
+indices = importances.argsort()[::-1]
+
+plt.figure(figsize=(12, 6))
+plt.title("Feature Importances")
+plt.bar(range(X.shape[1]), importances[indices], align='center')
+plt.xticks(range(X.shape[1]), [feature_names[i] for i in indices], rotation=90)
+plt.tight_layout()
+plt.show()
 
 import joblib
 
-joblib.dump(model, 'rf_malware_model.pkl')
-joblib.dump(label_encoder, 'malware_label_encoder.pkl')
+# Save model to file
+joblib.dump(model, 'malware_rf_model.joblib')
+
+# Optionally save the scaler too, if used
+joblib.dump(scaler, 'feature_scaler.joblib')

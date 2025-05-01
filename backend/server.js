@@ -77,10 +77,9 @@ app.post("/api/predict-log-file", upload.single("logFile"), (req, res) => {
 
 
 // --- Predict from document features ---
-app.post("/api/predict-doc", (req, res) => {
-  const py = spawn("python", ["./models/predict_doc.py"]);
-  py.stdin.write(JSON.stringify(req.body));
-  py.stdin.end();
+app.post("/api/predict-doc", upload.single("document"), (req, res) => {
+  const filePath = path.resolve(req.file.path);
+  const py = spawn("python", ["./models/predict_doc.py", filePath]);
 
   let result = "";
   py.stdout.on("data", (data) => {
@@ -92,9 +91,23 @@ app.post("/api/predict-doc", (req, res) => {
   });
 
   py.on("close", (code) => {
-    res.json({ prediction: result.trim() });
+    fs.unlinkSync(filePath); // delete temp file
+
+    try {
+      const predictions = JSON.parse(result.trim());
+      res.json({ predictions }); // send back prediction array
+    } catch (err) {
+      console.error("Prediction error:", err);
+      res.status(500).json({ error: "Failed to parse predictions" });
+    }
+    py.stderr.on("data", (data) => {
+      console.error(`stderr: ${data}`);
+    });
   });
+  
+  
 });
+
 
 // --- Predict from image path ---
 app.post("/api/predict-img", (req, res) => {

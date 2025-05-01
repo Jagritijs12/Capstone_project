@@ -1,17 +1,58 @@
-import sys
-import json
-import joblib
 import pandas as pd
+import joblib
+import sys
+import os
+import json
 
-# Load model and encoder
-model = joblib.load('C:/Users/archa/.vscode/Capstone project 2.0/Capstone_project/backend/models/rf_malware_model.pkl')
-label_encoder = joblib.load('C:/Users/archa/.vscode/Capstone project 2.0/Capstone_project/backend/models/malware_label_encoder.pkl')
+# -------- Load saved model and scaler --------
+model = joblib.load("./models/malware_rf_model.joblib")
+scaler = joblib.load("./models/feature_scaler.joblib")
 
-# Read input from Node
-input_data = json.loads(sys.stdin.read())
-df = pd.DataFrame([input_data])
+# -------- Load and parse input file --------
+def load_document(filepath):
+    if filepath.endswith(".csv"):
+        df = pd.read_csv(filepath)
+    elif filepath.endswith(".txt"):
+        df = pd.read_csv(filepath, delimiter=",")  # adjust delimiter if needed
+    else:
+        raise ValueError("Unsupported file type. Use CSV or TXT with structured data.")
+    return df
 
-# Predict
-pred = model.predict(df)[0]
-label = label_encoder.inverse_transform([pred])[0]
-print(label)
+# -------- Preprocess --------
+def preprocess(df):
+    if "hash" in df.columns:
+        df = df.drop(columns=["hash"])
+    if "millisecond" in df.columns:
+        df = df.drop(columns=["millisecond"])
+    if "classification" in df.columns:
+        df = df.drop(columns=["classification"])
+    X_scaled = scaler.transform(df)
+    return X_scaled
+
+# -------- Run inference --------
+def predict(filepath):
+    df = load_document(filepath)
+    X_scaled = preprocess(df)
+    preds = model.predict(X_scaled)
+    pred_labels = ["benign" if p == 0 else "malware" for p in preds]
+    
+    # Return list of predictions
+    return pred_labels
+
+# -------- Main entry point --------
+if __name__ == "__main__":
+    try:
+        if len(sys.argv) != 2:
+            raise ValueError("Usage: python predict_doc.py <path_to_input_document>")
+
+        file_path = sys.argv[1]
+        if not os.path.isfile(file_path):
+            raise FileNotFoundError(f"File not found: {file_path}")
+
+        results = predict(file_path)
+        print(json.dumps(results))  # Output as JSON list
+
+    except Exception as e:
+        error_response = {"error": str(e)}
+        print(json.dumps(error_response))
+        sys.exit(1)
